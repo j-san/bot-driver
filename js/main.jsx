@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 
 var pulser = {
-    running: true,
+    running: false,
     frameCount: 0,
     fps: 0,
     lastFpsComputeTime: 0,
@@ -29,6 +29,7 @@ var pulser = {
             console.log('Stoping clock...')
             this.running = false;
             cancelAnimationFrame(this.ref);
+            dispatch('pause');
         }
 
         this.ref = requestAnimationFrame(this.pulse);
@@ -112,6 +113,7 @@ function beat(state, action) {
                 lastClock: now
             };
     }
+    return {...state};
 }
 
 function Stage({x, y, direction}) {
@@ -148,56 +150,56 @@ function App() {
         return pulser.stop;
     }, []);
 
-    return <div style={{height: '100vh', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-        <div style={{perspective: '250px', transformStyle: 'preserve-3d'}}>
-            <div style={{transform: `rotateX(-15deg)`, height: 300, width: 300, border: '1px solid red', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+    return <div className="container">
+        <div className="row perspective">
+            <div className="column card" style={{transform: 'rotateY(15deg) translateZ(-35px)'}}>
                 <h1 style={{fontSize: 40}}>Bot Driver</h1>
-                <p style={{fontSize: 20}}>This is just a test</p>
+                <p style={{fontSize: 24}}>This is just a test</p>
                 <p style={{fontSize: 16}}>Use arrow keys to control vehicule. Left and right for direction, top and down for velocity, no rocket science ;)</p>
             </div>
-        </div>
 
-        <div style={{perspective: '250px', transformStyle: 'preserve-3d'}}>
-            <svg viewBox="0 0 240 240" style={{transform: `rotateX(${20 + state.velocity * 2}deg) rotateY(${state.turn * state.velocity * 20}deg)`, height: 300, width: 300}}>
-                <defs>
-                    <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
-                        <path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" strokeWidth="0.5"/>
-                    </pattern>
-                    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-                        <rect width="80" height="80" fill="url(#smallGrid)"/>
-                        <path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" strokeWidth="1"/>
-                    </pattern>
-                </defs>
-                <Stage x={state.x} y={state.y} direction={state.direction} />
-            </svg>
-        </div>
+            <div className="grow center" style={{pointerEvents: 'none'}}>
+                <svg className="card" viewBox="0 0 240 240" style={{transform: `rotateX(${20 + state.velocity * 2}deg) rotateY(${state.turn * state.velocity * 20}deg)`, height: 300, width: 300}}>
+                    <defs>
+                        <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+                            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" strokeWidth="0.5"/>
+                        </pattern>
+                        <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                            <rect width="80" height="80" fill="url(#smallGrid)"/>
+                            <path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" strokeWidth="1"/>
+                        </pattern>
+                    </defs>
+                    <Stage x={state.x} y={state.y} direction={state.direction} />
+                </svg>
+            </div>
 
-        <div style={{height: '100vh', width: 300, border: '1px solid red', padding: 15}}>
-            <p>
-                {pulser.frameCount}
-            </p>
-            <p>
-                fps {pulser.fps.toFixed(1)}
-            </p>
-            <button onClick={()=> {
-                pulser.running ? pulser.stop() : pulser.start(dispatch)
-            }}>{pulser.running ? 'pause' : 'resume'}</button>
-            <hr/>
-            <p>
-                velocity {state.velocity.toFixed(1)}
-            </p>
-            <p>
-                acceleration {state.acceleration.toFixed(1)}
-            </p>
-            <p>
-                direction {state.direction.toFixed(1)}
-            </p>
-            <p>
-                turn {state.turn}
-            </p>
-            <p>
-                x {state.x.toFixed(1)} y {state.y.toFixed(1)}
-            </p>
+            <div className="card" style={{transform: 'rotateY(-15deg) translateZ(-35px)'}}>
+                <p>
+                    {pulser.frameCount}
+                </p>
+                <p>
+                    fps {pulser.fps.toFixed(1)}
+                </p>
+                <button onClick={()=> {
+                    pulser.running ? pulser.stop() : pulser.start(dispatch)
+                }}>{pulser.running ? 'pause' : 'resume'}</button>
+                <hr/>
+                <p>
+                    velocity {state.velocity.toFixed(1)}
+                </p>
+                <p>
+                    acceleration {state.acceleration.toFixed(1)}
+                </p>
+                <p>
+                    direction {state.direction.toFixed(1)}
+                </p>
+                <p>
+                    turn {state.turn}
+                </p>
+                <p>
+                    x {state.x.toFixed(1)} y {state.y.toFixed(1)}
+                </p>
+            </div>
         </div>
     </div>;
 }

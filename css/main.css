@@ -1,1 +1,30 @@
 @import "./skull.css";
+
+.container {
+    max-width: 100%;
+    padding: 0 60px;
+}
+
+.perspective {
+    perspective: 50vh;
+    transform-style: preserve-3d;
+}
+.container > .row {
+    height: 100vh;
+    align-items: center;
+}
+.container > .row .card {
+    height: 300px;
+    width: 300px;
+}
+
+p {
+    margin-block-start: .5em;
+    margin-block-end: .5em;
+}
+
+.bot, .wheel {
+    fill: transparent;
+    stroke: #222;
+    stroke-width: 1;
+}

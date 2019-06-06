@@ -321,9 +321,10 @@ td:last-child {
     display: flex;
     flex-flow: column;
     justify-content: center;
+    align-items: center;
 }
 .grow {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 @media (min-width: 600px) {
     .row > * {
@@ -360,16 +361,24 @@ td:last-child {
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-.pull-right {
+.float-right {
     float: right;
 }
-.pull-left {
+.float-left {
     float: left;
 }
 .clear {
     clear: both;
 }
-
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

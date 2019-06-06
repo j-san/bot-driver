@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 
 var pulser = {
-    running: false,
+    running: true,
     frameCount: 0,
     fps: 0,
     lastFpsComputeTime: 0,
@@ -12,6 +12,7 @@ var pulser = {
     start(dispatch) {
         console.log('Starting clock...');
         this.running = true;
+        dispatch('resume');
 
         this.pulse = ()=> {
             dispatch('clock');
@@ -111,6 +112,11 @@ function beat(state, action) {
                 ...pilote(state, elapsedTime),
                 ...move(state, elapsedTime),
                 lastClock: now
+            };
+        case 'resume':
+            return {
+                ...state,
+                lastClock: (new Date()).valueOf()
             };
     }
     return {...state};

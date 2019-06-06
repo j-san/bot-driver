@@ -162,6 +162,7 @@ function App() {
                 <h1 style={{fontSize: 40}}>Bot Driver</h1>
                 <p style={{fontSize: 24}}>This is just a test</p>
                 <p style={{fontSize: 16}}>Use arrow keys to control vehicule. Left and right for direction, top and down for velocity, no rocket science ;)</p>
+                <p style={{fontSize: 12}}><a href="https://github.com/j-san/bot-driver">Github</a></p>
             </div>
 
             <div className="grow center" style={{pointerEvents: 'none'}}>

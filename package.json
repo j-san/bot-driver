@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "parcel": "^1.12.3",
-    "phaser": "^3.17.0",
+    "parcel": "^2.8.2",
+    "phaser": "^3.55.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
